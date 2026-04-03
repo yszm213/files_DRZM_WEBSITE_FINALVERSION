@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prévention & IMC - Dr. Safi Med ZMOULI</title>
+    <link rel="icon" type="image/png" href="Photo_DRZM.png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #loader { position:fixed;inset:0;background:#1a3578;display:flex;justify-content:center;align-items:center;z-index:10000;transition:opacity .5s; }
+        .loader-hidden { opacity:0;pointer-events:none; }
+        .heart-container { font-size:4.5em;color:white;animation:loader-pulse .8s infinite; }
+        @keyframes loader-pulse { 0%,100%{transform:scale(1)}15%{transform:scale(1.35)}30%{transform:scale(1)}45%{transform:scale(1.18)} }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="heart-container"><i class="fa-solid fa-heart-pulse"></i></div></div>
+
+    <a href="tel:15" class="urgence-banner">
+        <div class="texte-battant">⚠️ Urgence cardiologique : En cas de douleur thoracique, <strong>cliquez ici pour appeler le 15</strong>.</div>
+    </a>
+
+    <header>
+        <a href="accueil.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Dr. ZMOULI</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html">Le Médecin</a></li>
+                <li><a href="rendezvous.html">Infos & RDV</a></li>
+                <li><a href="faq.html">FAQ & Préparation</a></li>
+                <li><a href="glossaire.html">Glossaire</a></li>
+                <li><a href="imc.html" class="active">Outil Prévention</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" class="btn-rdv">Prendre RDV</a>
+            <button id="btn-theme" class="btn-theme" title="Basculer le mode sombre"><i id="icon-theme" class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
+
+    <div class="container-page">
+        <h1 class="page-titre" data-aos="fade-down">La prévention cardiovasculaire</h1>
+
+        <!-- Calculateur IMC -->
+        <div class="outil-medical" data-aos="zoom-in" data-aos-delay="200">
+            <p style="font-size:1.05em;line-height:1.65;color:rgba(255,255,255,0.75);margin-bottom:28px;">
+                Le surpoids et l'obésité sont des facteurs de risque majeurs pour les maladies cardiovasculaires.
+                L'Indice de Masse Corporelle (IMC) est un indicateur simple pour évaluer votre corpulence.
+            </p>
+            <hr style="border:0;height:1px;background:rgba(255,255,255,0.1);margin-bottom:32px;">
+
+            <h2 style="margin-top:0;margin-bottom:24px;">
+                <i class="fa-solid fa-weight-scale" style="color:#93c5fd;"></i> Calculateur d'IMC
+            </h2>
+
+            <div class="inputs-container">
+                <div class="input-group">
+                    <label for="poids"><i class="fa-solid fa-weight-scale"></i> Poids (kg)</label>
+                    <input type="number" id="poids" placeholder="Ex : 75" min="30" max="300">
+                </div>
+                <div class="input-group">
+                    <label for="taille"><i class="fa-solid fa-ruler-vertical"></i> Taille (m)</label>
+                    <input type="number" id="taille" step="0.01" placeholder="Ex : 1.75" min="1" max="2.5">
+                </div>
+            </div>
+
+            <button class="btn-calcul" onclick="calculerIMC()">Calculer mon IMC</button>
+            <div id="resultat-imc"></div>
+        </div>
+
+        <!-- Test Fréquence Cardiaque -->
+        <div class="outil-medical" data-aos="zoom-in" data-aos-delay="100" style="margin-top:40px;">
+            <h2 style="margin-top:0;margin-bottom:8px;">
+                <i class="fa-solid fa-stopwatch" style="color:#93c5fd;"></i> Test de Fréquence Cardiaque
+            </h2>
+            <p style="color:rgba(255,255,255,0.65);margin-bottom:28px;">Comptez vos battements sur une minute complète pour une précision maximale.</p>
+
+            <div class="pulse-interface">
+                <div id="status-text">Prêt pour le test ?</div>
+                <div class="timer-circle">
+                    <span id="timer-display">60</span>
+                    <small>sec</small>
+                </div>
+                <div class="counter-display">
+                    Battements : <span id="heartbeat-count">0</span>
+                </div>
+            </div>
+
+            <div style="text-align:center;">
+                <button id="start-pulse-btn" class="btn-calcul" onclick="demarrerTest()" style="width:auto;padding:14px 36px;">
+                    Lancer le test (3s préparation)
+                </button>
+                <button id="tap-pulse-btn" class="btn-calcul" style="width:auto;padding:14px 36px;background:#ef4444;display:none;">
+                    ♥ TAPPER ICI
+                </button>
+            </div>
+
+            <div style="text-align:center;margin-top:16px;">
+                <button onclick="resetTest()" style="background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;text-decoration:underline;font-size:.9em;font-family:inherit;">
+                    Réinitialiser
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Docteur Safi Med ZMOULI — Cardiologue & Maladies Vasculaires</strong></p>
+        <p>RPPS : 10100590727 | Pornic & Nantes</p>
+    </footer>
+
+    <button id="btn-retour-haut" title="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
+</body>
+</html>

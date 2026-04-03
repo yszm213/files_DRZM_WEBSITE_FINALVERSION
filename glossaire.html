@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossaire Médical - Dr. Safi Med ZMOULI</title>
+    <link rel="icon" type="image/png" href="Photo_DRZM.png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #loader { position:fixed;inset:0;background:#1a3578;display:flex;justify-content:center;align-items:center;z-index:10000;transition:opacity .5s; }
+        .loader-hidden { opacity:0;pointer-events:none; }
+        .heart-container { font-size:4.5em;color:white;animation:loader-pulse .8s infinite; }
+        @keyframes loader-pulse { 0%,100%{transform:scale(1)}15%{transform:scale(1.35)}30%{transform:scale(1)}45%{transform:scale(1.18)} }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="heart-container"><i class="fa-solid fa-heart-pulse"></i></div></div>
+
+    <a href="tel:15" class="urgence-banner">
+        <div class="texte-battant">⚠️ Urgence cardiologique : En cas de douleur thoracique, <strong>cliquez ici pour appeler le 15</strong>.</div>
+    </a>
+
+    <header>
+        <a href="accueil.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Dr. ZMOULI</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html">Le Médecin</a></li>
+                <li><a href="rendezvous.html">Infos & RDV</a></li>
+                <li><a href="faq.html">FAQ & Préparation</a></li>
+                <li><a href="glossaire.html" class="active">Glossaire</a></li>
+                <li><a href="imc.html">Outil Prévention</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" class="btn-rdv">Prendre RDV</a>
+            <button id="btn-theme" class="btn-theme"><i id="icon-theme" class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
+
+    <div class="container-page">
+        <h1 class="page-titre" data-aos="fade-down">Dictionnaire de Cardiologie</h1>
+
+        <div class="search-box" data-aos="fade-up" data-aos-delay="100">
+            <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);color:#94a3b8;"></i>
+            <input type="text" id="search-glossaire" oninput="filtrerGlossaire()" placeholder="Rechercher (ex: AVC, Tension, Valve)…">
+        </div>
+
+        <div class="alphabet-index" data-aos="fade-up" data-aos-delay="150">
+            <button class="alpha-btn" onclick="filterByLetter('A')">A</button>
+            <button class="alpha-btn" onclick="filterByLetter('B')">B</button>
+            <button class="alpha-btn" onclick="filterByLetter('C')">C</button>
+            <button class="alpha-btn" onclick="filterByLetter('D')">D</button>
+            <button class="alpha-btn" onclick="filterByLetter('E')">E</button>
+            <button class="alpha-btn" onclick="filterByLetter('F')">F</button>
+            <button class="alpha-btn" onclick="filterByLetter('H')">H</button>
+            <button class="alpha-btn" onclick="filterByLetter('I')">I</button>
+            <button class="alpha-btn" onclick="filterByLetter('P')">P</button>
+            <button class="alpha-btn" onclick="filterByLetter('S')">S</button>
+            <button class="alpha-btn" onclick="filterByLetter('T')">T</button>
+            <button class="alpha-btn" onclick="filterByLetter('V')">V</button>
+            <button class="alpha-btn" onclick="showAll()" style="background:var(--primary);color:white;border-color:var(--primary);">TOUS</button>
+        </div>
+
+        <p id="no-results" style="display:none;text-align:center;color:var(--text-muted);font-size:1.1em;padding:40px;">Aucun terme trouvé.</p>
+
+        <div class="grille-glossaire" id="liste-glossaire">
+            <div class="carte term-card" data-aos="fade-up"><h3>AVC</h3><p>Accident Vasculaire Cérébral : arrêt brutal de l'irrigation d'une partie du cerveau.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Ablation</h3><p>Procédure pour détruire des tissus cardiaques causant des troubles du rythme.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Anévrisme</h3><p>Dilatation anormale d'une artère pouvant entraîner une rupture.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Angine de poitrine</h3><p>Douleur thoracique liée à un manque d'oxygène du muscle cardiaque.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Arythmie</h3><p>Dérèglement de la fréquence ou de la régularité des battements du cœur.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Athérosclérose</h3><p>Dépôt de plaques de graisse sur la paroi des artères.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Bradycardie</h3><p>Fréquence cardiaque trop lente (inférieure à 60 battements/minute).</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Cardiomyopathie</h3><p>Maladie affaiblissant le muscle cardiaque.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Coronarographie</h3><p>Examen radiologique pour visualiser les artères coronaires.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Défibrillateur</h3><p>Appareil implanté ou externe pour traiter les arrêts cardiaques.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>ECG</h3><p>Électrocardiogramme : enregistrement de l'activité électrique du cœur.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Échocardiographie</h3><p>Imagerie par ultrasons pour examiner la structure du cœur.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Extrasystole</h3><p>Contraction cardiaque prématurée perçue comme un battement supplémentaire.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Fibrillation</h3><p>Contraction rapide et désordonnée des fibres musculaires cardiaques.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Holter</h3><p>Enregistrement continu du rythme ou de la tension sur 24h ou 48h.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Hypertension</h3><p>Pression artérielle trop élevée de façon permanente.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Infarctus</h3><p>Mort d'une partie du muscle cardiaque suite à l'obstruction d'une artère.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Insuffisance cardiaque</h3><p>Incapacité du cœur à pomper suffisamment de sang pour l'organisme.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Ischémie</h3><p>Diminution de l'apport de sang oxygéné vers un organe.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Pacemaker</h3><p>Stimulateur cardiaque artificiel pour réguler le pouls.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Péricardite</h3><p>Inflammation de la membrane qui entoure le cœur.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Souffle cardiaque</h3><p>Bruit anormal détecté à l'auscultation du cœur.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Stent</h3><p>Petit ressort métallique inséré pour maintenir une artère ouverte.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Syncope</h3><p>Perte de connaissance brève liée à une baisse de perfusion du cerveau.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Tachycardie</h3><p>Fréquence cardiaque trop rapide (supérieure à 100 battements/minute).</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Thrombose</h3><p>Formation d'un caillot de sang dans un vaisseau.</p></div>
+            <div class="carte term-card" data-aos="fade-up"><h3>Valvulopathie</h3><p>Maladie touchant les valves du cœur.</p></div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Docteur Safi Med ZMOULI — Cardiologue & Maladies Vasculaires</strong></p>
+        <p>RPPS : 10100590727 | Pornic & Nantes</p>
+    </footer>
+
+    <!-- Bouton retour en haut (dans le body, pas le head) -->
+    <button id="btn-retour-haut" title="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        function filterByLetter(letter) {
+            document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.term-card').forEach(card => {
+                const title = card.querySelector('h3').innerText.toUpperCase();
+                card.style.display = title.startsWith(letter) ? '' : 'none';
+            });
+            document.getElementById('no-results').style.display = 'none';
+        }
+
+        function showAll() {
+            document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.term-card').forEach(card => card.style.display = '');
+            document.getElementById('no-results').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

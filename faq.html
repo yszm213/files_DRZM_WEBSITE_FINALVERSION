@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ & Préparation - Dr. Safi Med ZMOULI</title>
+    <link rel="icon" type="image/png" href="Photo_DRZM.png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #loader { position:fixed;inset:0;background:#1a3578;display:flex;justify-content:center;align-items:center;z-index:10000;transition:opacity .5s; }
+        .loader-hidden { opacity:0;pointer-events:none; }
+        .heart-container { font-size:4.5em;color:white;animation:loader-pulse .8s infinite; }
+        @keyframes loader-pulse { 0%,100%{transform:scale(1)}15%{transform:scale(1.35)}30%{transform:scale(1)}45%{transform:scale(1.18)} }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="heart-container"><i class="fa-solid fa-heart-pulse"></i></div></div>
+
+    <a href="tel:15" class="urgence-banner">
+        <div class="texte-battant">⚠️ Urgence cardiologique : En cas de douleur thoracique, <strong>cliquez ici pour appeler le 15</strong>.</div>
+    </a>
+
+    <header>
+        <a href="accueil.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Dr. ZMOULI</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html">Le Médecin</a></li>
+                <li><a href="rendezvous.html">Infos & RDV</a></li>
+                <li><a href="faq.html" class="active">FAQ & Préparation</a></li>
+                <li><a href="glossaire.html">Glossaire</a></li>
+                <li><a href="imc.html">Outil Prévention</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" class="btn-rdv">Prendre RDV</a>
+            <button id="btn-theme" class="btn-theme" title="Basculer le mode sombre"><i id="icon-theme" class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
+
+    <div class="container-page">
+        <h1 class="page-titre" data-aos="fade-down">Préparer votre consultation</h1>
+        <p class="page-sous-titre" data-aos="fade-down" data-aos-delay="100">Tout ce qu'il faut savoir avant de venir au cabinet.</p>
+
+        <div class="checklist-visite" data-aos="fade-right" data-aos-delay="200">
+            <h2><i class="fa-solid fa-clipboard-list"></i> Documents à apporter le jour J</h2>
+            <ul>
+                <li><i class="fa-regular fa-square-check" style="color:#3b82f6;font-size:1.2em;"></i> Votre Carte Vitale à jour et votre carte de mutuelle.</li>
+                <li><i class="fa-regular fa-square-check" style="color:#3b82f6;font-size:1.2em;"></i> Le courrier de votre médecin traitant (très important).</li>
+                <li><i class="fa-regular fa-square-check" style="color:#3b82f6;font-size:1.2em;"></i> Vos ordonnances de médicaments actuelles.</li>
+                <li><i class="fa-regular fa-square-check" style="color:#3b82f6;font-size:1.2em;"></i> Vos dernières prises de sang ou examens médicaux récents.</li>
+            </ul>
+        </div>
+
+        <h2 data-aos="fade-up" data-aos-delay="300" style="color:var(--primary);margin-bottom:8px;">
+            <i class="fa-solid fa-circle-question" style="color:var(--primary);"></i> Questions fréquentes
+        </h2>
+
+        <div class="accordion" data-aos="fade-up" data-aos-delay="400">
+            <div class="accordion-item">
+                <button class="accordion-bouton">Faut-il être à jeun pour une consultation classique ? <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="accordion-contenu">
+                    <p>Non, il n'est pas nécessaire d'être à jeun pour un électrocardiogramme ou une échographie cardiaque. Vous pouvez manger et prendre vos médicaments habituels, sauf indication contraire de votre médecin.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-bouton">Comment s'habiller pour une épreuve d'effort ? <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="accordion-contenu">
+                    <p>Prévoyez une tenue confortable (vêtements de sport, pantalon souple) et surtout des chaussures de sport (baskets) adaptées pour pédaler sur un vélo ergonomique.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-bouton">Prenez-vous de nouveaux patients ? <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="accordion-contenu">
+                    <p>Oui, le Dr Zmouli accepte les nouveaux patients, de préférence orientés par leur médecin traitant dans le cadre du parcours de soins coordonnés.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Docteur Safi Med ZMOULI — Cardiologue & Maladies Vasculaires</strong></p>
+        <p>RPPS : 10100590727 | Pornic & Nantes</p>
+    </footer>
+
+    <button id="btn-retour-haut" title="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
+</body>
+</html>

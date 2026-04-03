@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infos & RDV - Dr. Safi Med ZMOULI</title>
+    <link rel="icon" type="image/png" href="Photo_DRZM.png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #loader { position:fixed;inset:0;background:#1a3578;display:flex;justify-content:center;align-items:center;z-index:10000;transition:opacity .5s; }
+        .loader-hidden { opacity:0;pointer-events:none; }
+        .heart-container { font-size:4.5em;color:white;animation:loader-pulse .8s infinite; }
+        @keyframes loader-pulse { 0%,100%{transform:scale(1)}15%{transform:scale(1.35)}30%{transform:scale(1)}45%{transform:scale(1.18)} }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="heart-container"><i class="fa-solid fa-heart-pulse"></i></div></div>
+
+    <a href="tel:15" class="urgence-banner">
+        <div class="texte-battant">⚠️ Urgence cardiologique : En cas de douleur thoracique, <strong>cliquez ici pour appeler le 15</strong>.</div>
+    </a>
+
+    <header>
+        <a href="accueil.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Dr. ZMOULI</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html">Le Médecin</a></li>
+                <li><a href="rendezvous.html" class="active">Infos & RDV</a></li>
+                <li><a href="faq.html">FAQ & Préparation</a></li>
+                <li><a href="glossaire.html">Glossaire</a></li>
+                <li><a href="imc.html">Outil Prévention</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" class="btn-rdv">Prendre RDV</a>
+            <button id="btn-theme" class="btn-theme" title="Basculer le mode sombre"><i id="icon-theme" class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
+
+    <div class="container-page">
+        <h1 class="page-titre" data-aos="fade-down">Prendre Rendez-vous & Accès</h1>
+        <p class="page-sous-titre" data-aos="fade-down" data-aos-delay="100">Retrouvez toutes les informations pour organiser votre consultation.</p>
+
+        <div class="grille-contact">
+
+            <div class="carte" data-aos="fade-up" data-aos-delay="200">
+                <h2><i class="fa-solid fa-calendar-check"></i> Prendre Rendez-vous</h2>
+                <p>La prise de rendez-vous se fait <strong>prioritairement en ligne</strong> via la plateforme sécurisée Maiia, disponible 24h/24 et 7j/7.</p>
+                <a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" class="btn-maiia-gros"><i class="fa-solid fa-arrow-up-right-from-square"></i> Accéder à mon espace Maiia</a>
+
+                <h3 style="margin-top:28px; color:var(--text-muted); font-size:1em; display:flex; align-items:center; gap:8px;"><i class="fa-solid fa-phone" style="color:var(--primary);"></i> Secrétariat Médical</h3>
+                <p>Pour une urgence relative ou sans accès à internet, notre secrétariat est joignable au :</p>
+                <span class="numero-tel">02 40 82 27 57</span>
+            </div>
+
+            <div class="carte" data-aos="fade-up" data-aos-delay="300">
+                <h2><i class="fa-solid fa-clock"></i> Horaires d'ouverture</h2>
+                <p>Le secrétariat et les cabinets vous accueillent aux horaires suivants :</p>
+                <table class="table-horaires" id="tableau-horaires">
+                    <tr data-jour="1"><td class="jour">Lundi</td><td>08h00 – 19h00 <span style="font-size:.85em;color:var(--text-muted);">(Pornic)</span></td></tr>
+                    <tr data-jour="2"><td class="jour">Mardi</td><td>08h00 – 19h00 <span style="font-size:.85em;color:var(--text-muted);">(Pornic)</span></td></tr>
+                    <tr data-jour="3"><td class="jour">Mercredi</td><td>08h00 – 19h00 <span style="font-size:.85em;color:var(--text-muted);">(Pornic)</span></td></tr>
+                    <tr data-jour="4"><td class="jour">Jeudi</td><td>08h00 – 19h00 <span style="font-size:.85em;color:#e53e3e;font-weight:600;">(Nantes l'après-midi)</span></td></tr>
+                    <tr data-jour="5"><td class="jour">Vendredi</td><td>08h00 – 19h00 <span style="font-size:.85em;color:var(--text-muted);">(Pornic)</span></td></tr>
+                    <tr data-jour="6"><td class="jour">Samedi</td><td>09h00 – 12h30 <span style="font-size:.85em;color:var(--text-muted);">(Pornic)</span></td></tr>
+                    <tr data-jour="0"><td class="jour">Dimanche</td><td style="color:#e53e3e;font-weight:700;">Fermé</td></tr>
+                </table>
+            </div>
+
+            <div class="carte" data-aos="fade-up" data-aos-delay="400">
+                <h2><i class="fa-solid fa-location-dot"></i> Nos Adresses</h2>
+                <h3 style="color:var(--primary);font-size:1.05em;margin-bottom:6px;">Cabinet de Pornic <span style="font-size:0.8em;color:var(--text-muted);font-weight:400;">(Principal)</span></h3>
+                <p>23 Boulevard de Linz<br>44210 Pornic</p>
+                <p style="font-size:.9em;color:var(--text-muted);"><i class="fa-solid fa-circle-parking"></i> Parking gratuit à disposition à proximité immédiate.</p>
+
+                <hr style="border:0;height:1px;background:var(--border);margin:22px 0;">
+
+                <h3 style="color:var(--primary);font-size:1.05em;margin-bottom:6px;">Cabinet de Nantes</h3>
+                <p>4 Rue Eric Tabarly<br>44200 Nantes</p>
+                <p style="background:#fef2f2;color:#b91c1c;padding:12px;border-radius:8px;font-weight:600;font-size:.9em;margin-top:14px;border-left:4px solid #e53e3e;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Consultations <strong>uniquement le Jeudi</strong> de 14h00 à 19h00.
+                </p>
+            </div>
+
+            <div class="carte card-vcard" data-aos="fade-up" data-aos-delay="500">
+                <h2><i class="fa-solid fa-id-card-clip" style="color:var(--success);"></i> Contact Digital</h2>
+                <p>Enregistrez les coordonnées du cabinet directement dans votre répertoire mobile.</p>
+                <button class="btn-vcard" onclick="telechargerVCard()">
+                    <i class="fa-solid fa-file-export"></i> Enregistrer le Contact
+                </button>
+                <p style="font-size:.82em;color:var(--text-muted);margin-top:14px;">Compatible iPhone et Android (format .vcf standard).</p>
+            </div>
+
+            <div class="carte carte-map" data-aos="fade-up" data-aos-delay="600">
+                <iframe src="https://maps.google.com/maps?q=23%20Boulevard%20de%20Linz,%2044210%20Pornic&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte - Cabinet de Pornic"></iframe>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Docteur Safi Med ZMOULI — Cardiologue & Maladies Vasculaires</strong></p>
+        <p>RPPS : 10100590727 | Pornic & Nantes</p>
+    </footer>
+
+    <button id="btn-retour-haut" title="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
+</body>
+</html>
