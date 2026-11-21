@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - Dr. Safi Med ZMOULI</title>
+    <meta name="description" content="Cabinet de cardiologie du Dr. Safi Med Zmouli à Pornic et Nantes : prévention, diagnostic et traitement des maladies cardiovasculaires. Prise de rendez-vous en ligne via Maiia.">
+    <meta name="theme-color" content="#1a3578">
     <meta property="og:title" content="Cabinet de Cardiologie - Dr. Safi Med ZMOULI">
     <meta property="og:description" content="Prenez rendez-vous avec le Dr. Zmouli à Pornic ou Nantes. Prévention, diagnostic et traitement des maladies cardiovasculaires.">
     <meta property="og:image" content="Photo_DRZM.png">
@@ -12,25 +14,21 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        #loader { position:fixed;inset:0;background:#1a3578;display:flex;justify-content:center;align-items:center;z-index:10000;transition:opacity .5s; }
-        .loader-hidden { opacity:0;pointer-events:none; }
-        .heart-container { font-size:4.5em;color:white;animation:loader-pulse .8s infinite; }
-        @keyframes loader-pulse { 0%,100%{transform:scale(1)}15%{transform:scale(1.35)}30%{transform:scale(1)}45%{transform:scale(1.18)} }
-    </style>
 </head>
 <body>
+    <!-- Thème appliqué avant l'affichage pour éviter un flash blanc -->
+    <script>try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.body.classList.add('dark-mode');}catch(e){}</script>
     <div id="loader"><div class="heart-container"><i class="fa-solid fa-heart-pulse"></i></div></div>
 
     <a href="tel:15" class="urgence-banner">
-        <div class="texte-battant">⚠️ Urgence cardiologique : En cas de douleur thoracique, <strong>cliquez ici pour appeler le 15</strong>.</div>
+        <div class="texte-battant"><span class="point-urgence" aria-hidden="true"></span><span>Urgence cardiologique : En cas de douleur thoracique, <strong>cliquez ici pour appeler le 15</strong>.</span></div>
     </a>
 
     <header>
         <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Dr. ZMOULI</a>
-        <nav>
+        <nav id="menu-principal" aria-label="Navigation principale">
             <ul>
-                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="index.html" class="active" aria-current="page">Accueil</a></li>
                 <li><a href="profil.html">Le Médecin</a></li>
                 <li><a href="rendezvous.html">Infos & RDV</a></li>
                 <li><a href="faq.html">FAQ & Préparation</a></li>
@@ -39,28 +37,128 @@
             </ul>
         </nav>
         <div class="header-actions">
-            <a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" class="btn-rdv">Prendre RDV</a>
-            <button id="btn-theme" class="btn-theme" title="Basculer le mode sombre"><i id="icon-theme" class="fa-solid fa-moon"></i></button>
+            <a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" rel="noopener" class="btn-rdv"><i class="fa-regular fa-calendar-check"></i><span>Prendre RDV</span></a>
+            <button id="btn-theme" class="btn-theme" title="Basculer le mode sombre" aria-label="Basculer le mode sombre"><i id="icon-theme" class="fa-solid fa-moon"></i></button>
+            <button id="btn-menu" class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-principal"><i class="fa-solid fa-bars"></i></button>
         </div>
     </header>
 
     <section class="hero">
-        <div data-aos="zoom-in" data-aos-duration="1000">
-            <h1>Votre santé cardiovasculaire,<br>notre priorité absolue.</h1>
-            <p>Bienvenue sur le site du cabinet de cardiologie du Docteur Safi Med Zmouli. Nous vous accueillons sur nos sites de Pornic et de Nantes pour des bilans complets, un suivi personnalisé et des examens spécialisés de pointe.</p>
-            <a href="rendezvous.html" class="btn-rdv" style="font-size:1.1em; padding:14px 32px;">Découvrir le cabinet</a>
+        <div class="hero-grid">
+            <div class="hero-texte" data-aos="fade-up">
+                <span class="eyebrow"><i class="fa-solid fa-heart-pulse"></i> Cardiologue & Maladies Vasculaires · Pornic & Nantes</span>
+                <h1>Votre santé cardiovasculaire,<br><span>notre priorité absolue.</span></h1>
+                <p>Bienvenue sur le site du cabinet de cardiologie du Docteur Safi Med Zmouli. Nous vous accueillons sur nos sites de Pornic et de Nantes pour des bilans complets, un suivi personnalisé et des examens spécialisés de pointe.</p>
+                <div class="hero-actions">
+                    <a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" rel="noopener" class="btn-rdv"><i class="fa-regular fa-calendar-check"></i> Prendre RDV en ligne</a>
+                    <a href="rendezvous.html" class="btn-secondaire">Découvrir le cabinet <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <ul class="hero-points">
+                    <li><i class="fa-solid fa-circle-check"></i> RDV en ligne 24h/24 via Maiia</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Secrétariat : 02 40 82 27 57</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Nouveaux patients acceptés</li>
+                </ul>
+            </div>
+            <div class="hero-visuel" data-aos="fade-left" data-aos-delay="150">
+                <img src="cabinet.webp" alt="Entrée du cabinet, 23 Boulevard de Linz à Pornic" width="881" height="658">
+                <div class="badge-ecg" aria-hidden="true">
+                    <small>Rythme cardiaque</small>
+                    <svg viewBox="0 0 150 40"><path class="fond" d="M0 22 H38 L46 22 L52 6 L58 36 L64 14 L69 22 H98 L104 22 L110 6 L116 36 L122 14 L127 22 H150"/><path class="trace" d="M0 22 H38 L46 22 L52 6 L58 36 L64 14 L69 22 H98 L104 22 L110 6 L116 36 L122 14 L127 22 H150"/></svg>
+                </div>
+                <div class="badge-flottant">
+                    <div class="mini-photo"><img src="Photo_DRZM.png" alt=""></div>
+                    <div><strong>Dr. Safi Med ZMOULI</strong><small>Cardiologue · RPPS 10100590727</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-accueil">
+        <span class="eyebrow">Le cabinet en ligne</span>
+        <h2>Tout pour préparer votre consultation</h2>
+        <div class="acces-grille">
+            <a href="rendezvous.html" class="acces-carte mise-en-avant" data-aos="fade-up">
+                <span class="icone"><i class="fa-solid fa-calendar-check"></i></span>
+                <h3>Infos & RDV</h3>
+                <p>Rendez-vous en ligne, horaires d'ouverture, adresses de Pornic et de Nantes, et contact du secrétariat.</p>
+                <span class="lien">Organiser ma venue <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a href="profil.html" class="acces-carte" data-aos="fade-up" data-aos-delay="80">
+                <span class="icone"><i class="fa-solid fa-user-doctor"></i></span>
+                <h3>Le Médecin</h3>
+                <p>Présentation du Dr. Zmouli, ses expertises et les actes médicaux réalisés au cabinet.</p>
+                <span class="lien">Découvrir <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a href="faq.html" class="acces-carte" data-aos="fade-up" data-aos-delay="160">
+                <span class="icone"><i class="fa-solid fa-clipboard-list"></i></span>
+                <h3>FAQ & Préparation</h3>
+                <p>Les documents à apporter le jour J et les réponses aux questions fréquentes.</p>
+                <span class="lien">Préparer ma visite <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a href="glossaire.html" class="acces-carte" data-aos="fade-up">
+                <span class="icone"><i class="fa-solid fa-book-medical"></i></span>
+                <h3>Glossaire</h3>
+                <p>Un dictionnaire de cardiologie avec recherche instantanée pour comprendre les termes médicaux.</p>
+                <span class="lien">Consulter <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a href="imc.html" class="acces-carte" data-aos="fade-up" data-aos-delay="80">
+                <span class="icone"><i class="fa-solid fa-heart-circle-check"></i></span>
+                <h3>Outil Prévention</h3>
+                <p>Calculez votre IMC et mesurez votre fréquence cardiaque en une minute.</p>
+                <span class="lien">Essayer les outils <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+        </div>
+    </section>
+
+    <section class="section-accueil">
+        <div class="bandeau-infos">
+            <div data-aos="fade-up"><span class="icone"><i class="fa-solid fa-phone"></i></span>
+                <div><strong>Secrétariat médical</strong><a href="tel:0240822757">02 40 82 27 57</a></div></div>
+            <div data-aos="fade-up" data-aos-delay="80"><span class="icone"><i class="fa-solid fa-clock"></i></span>
+                <div><strong>Horaires</strong><span>Lundi – Vendredi : 08h00 – 19h00<br>Samedi : 09h00 – 12h30 · Dimanche : fermé</span></div></div>
+            <div data-aos="fade-up" data-aos-delay="160"><span class="icone"><i class="fa-solid fa-location-dot"></i></span>
+                <div><strong>Pornic & Nantes</strong><span>23 Boulevard de Linz, Pornic<br>Nantes uniquement le jeudi, 14h00 – 19h00</span></div></div>
         </div>
     </section>
 
     <footer>
-        <p><strong>Docteur Safi Med ZMOULI — Cardiologue & Maladies Vasculaires</strong></p>
-        <p>RPPS : 10100590727 | Pornic & Nantes</p>
+        <div class="footer-grille">
+            <div>
+                <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Dr. ZMOULI</a>
+                <p><strong>Docteur Safi Med ZMOULI — Cardiologue & Maladies Vasculaires</strong></p>
+                <p>RPPS : 10100590727 | Pornic & Nantes</p>
+            </div>
+            <div>
+                <h3>Cabinets</h3>
+                <p><strong>Pornic</strong><br>23 Boulevard de Linz, 44210 Pornic</p>
+                <p><strong>Nantes</strong> (le jeudi, 14h00 – 19h00)<br>4 Rue Eric Tabarly, 44200 Nantes</p>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>Secrétariat : <a href="tel:0240822757">02 40 82 27 57</a></p>
+                <p><a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" rel="noopener">Prendre RDV sur Maiia →</a></p>
+                <p><a href="rendezvous.html">Horaires & accès</a></p>
+            </div>
+            <div>
+                <h3>Urgence</h3>
+                <p>En cas de douleur thoracique :</p>
+                <p><a href="tel:15" class="footer-urgence"><i class="fa-solid fa-phone"></i> Appeler le 15</a></p>
+            </div>
+        </div>
+        <div class="footer-bas">
+            <span>Docteur Safi Med ZMOULI — Cardiologue & Maladies Vasculaires</span>
+            <span>RPPS : 10100590727 | Pornic & Nantes</span>
+        </div>
     </footer>
 
-    <button id="btn-retour-haut" title="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+    <button id="btn-retour-haut" title="Retour en haut" aria-label="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
 
     <script src="script.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({ duration: 800, once: true });</script>
+    <script>
+        // Si la librairie d'animation ne charge pas, on affiche tout le contenu directement
+        if (window.AOS) { AOS.init({ duration: 700, once: true, offset: 40 }); }
+        else { document.querySelectorAll('[data-aos]').forEach(e => e.removeAttribute('data-aos')); }
+    </script>
 </body>
 </html>

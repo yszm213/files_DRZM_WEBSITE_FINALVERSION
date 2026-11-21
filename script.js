@@ -19,6 +19,8 @@ function calculerIMC() {
 
     poids = parseFloat(poids);
     taille = parseFloat(taille);
+    // Si la taille est saisie en centimètres (ex : 175), on la convertit en mètres
+    if (taille > 3) taille = taille / 100;
     const imc = (poids / (taille * taille)).toFixed(1);
 
     let msg, bg, color;
@@ -41,8 +43,14 @@ function calculerIMC() {
         color = '#fca5a5';
     }
 
+    // Jauge visuelle : de 15 à 40 d'IMC
+    const pos = Math.min(100, Math.max(0, (imc - 15) / 25 * 100));
+    msg += `<div class="imc-jauge" aria-hidden="true"><div class="barre"><span class="curseur" style="left:0%"></span></div>
+            <div class="graduations"><span>15</span><span>18,5</span><span>25</span><span>30</span><span>40</span></div></div>`;
+
     zone.style.display          = 'block';
     zone.innerHTML              = msg;
+    requestAnimationFrame(() => { const c = zone.querySelector('.curseur'); if (c) c.style.left = pos + '%'; });
     zone.style.backgroundColor  = bg;
     zone.style.color            = color;
 }
@@ -59,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (parseInt(ligne.getAttribute('data-jour')) === jourActuel) {
             ligne.classList.add('jour-actuel');
             const cell = ligne.querySelector('.jour');
-            if (cell) cell.innerHTML += " <span style='color:#e53e3e;font-size:.8em;margin-left:4px;'>(Aujourd'hui)</span>";
+            if (cell) cell.innerHTML += " <span class='badge-aujourdhui'>Aujourd'hui</span>";
         }
     });
 });
@@ -69,11 +77,11 @@ document.addEventListener('DOMContentLoaded', function () {
 // ===========================================
 window.addEventListener('scroll', function () {
     const btn = document.getElementById('btn-retour-haut');
+    const header = document.querySelector('header');
+    if (header) header.classList.toggle('scrolled', window.scrollY > 10);
     if (!btn) return;
-    btn.style.display = (window.scrollY > 200) ? 'flex' : 'none';
-    btn.style.alignItems = 'center';
-    btn.style.justifyContent = 'center';
-});
+    btn.classList.toggle('visible', window.scrollY > 200);
+}, { passive: true });
 
 document.addEventListener('DOMContentLoaded', function () {
     const btn = document.getElementById('btn-retour-haut');
@@ -87,17 +95,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnTheme  = document.getElementById('btn-theme');
     const iconTheme = document.getElementById('icon-theme');
 
-    // Restaurer le thème sauvegardé
-    if (localStorage.getItem('theme') === 'dark') {
+    // Restaurer le thème sauvegardé (ou celui du téléphone / ordinateur si aucun choix)
+    let themeSauve = null;
+    try { themeSauve = localStorage.getItem('theme'); } catch (e) {}
+    if (themeSauve === 'dark' || (!themeSauve && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.body.classList.add('dark-mode');
-        if (iconTheme) { iconTheme.classList.replace('fa-moon', 'fa-sun'); }
     }
+    if (iconTheme && document.body.classList.contains('dark-mode')) { iconTheme.classList.replace('fa-moon', 'fa-sun'); }
 
     if (!btnTheme) return;
 
     btnTheme.addEventListener('click', () => {
         const isDark = document.body.classList.toggle('dark-mode');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
         if (iconTheme) {
             iconTheme.classList.toggle('fa-moon', !isDark);
             iconTheme.classList.toggle('fa-sun', isDark);
@@ -115,9 +125,14 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.addEventListener('click', () => {
             // Fermer les autres
             document.querySelectorAll('.accordion-item').forEach(other => {
-                if (other !== item) other.classList.remove('actif');
+                if (other !== item) {
+                    other.classList.remove('actif');
+                    const b = other.querySelector('.accordion-bouton');
+                    if (b) b.setAttribute('aria-expanded', 'false');
+                }
             });
-            item.classList.toggle('actif');
+            const ouvert = item.classList.toggle('actif');
+            btn.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
         });
     });
 });
@@ -126,7 +141,17 @@ document.addEventListener('DOMContentLoaded', function () {
 // LOADER — affichage minimum garanti
 // ===========================================
 const LOADER_DEBUT = Date.now();
-const LOADER_MIN_MS = 700; // durée minimale d'affichage en ms
+const LOADER_MIN_MS = 450; // durée minimale d'affichage en ms (première page de la visite uniquement)
+
+// Le loader ne s'affiche qu'à la première page de la visite, pas à chaque changement de page
+(function () {
+    let dejaVu = false;
+    try { dejaVu = sessionStorage.getItem('loaderVu') === '1'; sessionStorage.setItem('loaderVu', '1'); } catch (e) {}
+    if (dejaVu) {
+        const loader = document.getElementById('loader');
+        if (loader) loader.style.display = 'none';
+    }
+})();
 
 function masquerLoader() {
     const loader = document.getElementById('loader');
@@ -181,6 +206,8 @@ function demarrerTest() {
     battements = 0;
     tempsRestant = 60;
 
+    const zoneRes   = document.getElementById('resultat-bpm');
+    if (zoneRes) zoneRes.style.display = 'none';
     const status    = document.getElementById('status-text');
     const timerDisp = document.getElementById('timer-display');
     const startBtn  = document.getElementById('start-pulse-btn');
@@ -240,7 +267,27 @@ function terminerTest() {
     const startBtn = document.getElementById('start-pulse-btn');
     startBtn.style.display   = 'inline-block';
     startBtn.innerText       = 'Relancer le test';
-    alert(`Votre fréquence cardiaque est de : ${battements} BPM`);
+    afficherResultatBPM(battements);
+}
+
+function afficherResultatBPM(bpm) {
+    const zone = document.getElementById('resultat-bpm');
+    if (!zone) { alert(`Votre fréquence cardiaque est de : ${bpm} BPM`); return; }
+    let detail, bg, color;
+    if (bpm < 60) {
+        detail = 'Fréquence inférieure à 60 battements/minute (voir <a href="glossaire.html" style="color:inherit">bradycardie</a>).';
+        bg = 'rgba(251,191,36,0.2)'; color = '#fbbf24';
+    } else if (bpm <= 100) {
+        detail = 'Fréquence comprise entre 60 et 100 battements/minute.';
+        bg = 'rgba(16,196,130,0.2)'; color = '#34d399';
+    } else {
+        detail = 'Fréquence supérieure à 100 battements/minute (voir <a href="glossaire.html" style="color:inherit">tachycardie</a>).';
+        bg = 'rgba(239,68,68,0.2)'; color = '#fca5a5';
+    }
+    zone.style.display         = 'block';
+    zone.style.backgroundColor = bg;
+    zone.style.color           = color;
+    zone.innerHTML = `Votre fréquence cardiaque est de <strong>${bpm} BPM</strong>.<br><span style="font-weight:500">${detail}<br>Ce test ne remplace pas un avis médical.</span>`;
 }
 
 function resetTest() {
@@ -255,6 +302,7 @@ function resetTest() {
     if (s('heartbeat-count')) s('heartbeat-count').innerText = '0';
     if (s('tap-pulse-btn'))   s('tap-pulse-btn').style.display  = 'none';
     if (s('start-pulse-btn')) s('start-pulse-btn').style.display = 'inline-block';
+    if (s('resultat-bpm'))    s('resultat-bpm').style.display   = 'none';
 }
 
 // ===========================================
@@ -275,4 +323,32 @@ function filtrerGlossaire() {
     });
 
     if (noRes) noRes.style.display = found ? 'none' : 'block';
+
+    // La recherche s'applique à tout le glossaire : on remet le bouton "TOUS" actif
+    document.querySelectorAll('.alpha-btn').forEach(b => b.classList.toggle('active', b.innerText === 'TOUS'));
+    majCompteur([...cards].filter(c => c.style.display !== 'none').length);
 }
+
+function majCompteur(nb) {
+    const compteur = document.getElementById('compteur-termes');
+    if (!compteur) return;
+    const total = document.querySelectorAll('.term-card').length;
+    if (nb === undefined) nb = total;
+    compteur.innerText = nb === total ? `${total} termes` : `${nb} terme${nb > 1 ? 's' : ''} sur ${total}`;
+}
+document.addEventListener('DOMContentLoaded', () => majCompteur());
+
+// ===========================================
+// MENU MOBILE
+// ===========================================
+document.addEventListener('DOMContentLoaded', function () {
+    const btnMenu = document.getElementById('btn-menu');
+    const header  = document.querySelector('header');
+    if (!btnMenu || !header) return;
+    btnMenu.addEventListener('click', () => {
+        const ouvert = header.classList.toggle('menu-ouvert');
+        btnMenu.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+        btnMenu.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
+        btnMenu.querySelector('i').className = ouvert ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    });
+});

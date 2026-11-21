@@ -26,6 +26,17 @@ Ce site n'est pas qu'une simple vitrine, il intègre plusieurs fonctionnalités 
 
 ---
 
+## 🆕 Version modernisée
+
+* **Nouveau design :** typographie Plus Jakarta Sans / Inter, cartes arrondies, en-tête translucide, page d'accueil avec accès rapide aux rubriques et infos pratiques.
+* **Menu mobile :** bouton menu (hamburger) sur téléphone et tablette.
+* **Mode sombre :** suit automatiquement le réglage du téléphone ou de l'ordinateur tant qu'aucun choix n'a été fait, sans flash blanc au chargement.
+* **Outils de prévention :** jauge visuelle pour l'IMC (taille acceptée en mètres ou en centimètres) et résultat du test de fréquence cardiaque affiché dans la page au lieu d'une alerte.
+* **Glossaire :** les filtres par lettre trouvent aussi les termes accentués (ex : Échocardiographie), compteur de résultats.
+* **Accessibilité & robustesse :** numéros de téléphone cliquables, libellés pour les lecteurs d'écran, contenu toujours visible si la librairie d'animation ne charge pas, loader affiché une seule fois par visite.
+
+---
+
 ## 🛠️ Technologies Utilisées
 
 * **HTML5** : Sémantique et structure claire.

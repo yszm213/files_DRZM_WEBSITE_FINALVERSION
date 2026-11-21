@@ -3,68 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glossaire Médical - Dr. Safi Med ZMOULI</title>
+    <title>Glossaire - Dr. Safi Med ZMOULI</title>
+    <meta name="description" content="Cabinet de cardiologie du Dr. Safi Med Zmouli à Pornic et Nantes : prévention, diagnostic et traitement des maladies cardiovasculaires. Prise de rendez-vous en ligne via Maiia.">
+    <meta name="theme-color" content="#1a3578">
     <link rel="icon" type="image/png" href="Photo_DRZM.png">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        #loader { position:fixed;inset:0;background:#1a3578;display:flex;justify-content:center;align-items:center;z-index:10000;transition:opacity .5s; }
-        .loader-hidden { opacity:0;pointer-events:none; }
-        .heart-container { font-size:4.5em;color:white;animation:loader-pulse .8s infinite; }
-        @keyframes loader-pulse { 0%,100%{transform:scale(1)}15%{transform:scale(1.35)}30%{transform:scale(1)}45%{transform:scale(1.18)} }
-    </style>
 </head>
 <body>
+    <!-- Thème appliqué avant l'affichage pour éviter un flash blanc -->
+    <script>try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.body.classList.add('dark-mode');}catch(e){}</script>
     <div id="loader"><div class="heart-container"><i class="fa-solid fa-heart-pulse"></i></div></div>
 
     <a href="tel:15" class="urgence-banner">
-        <div class="texte-battant">⚠️ Urgence cardiologique : En cas de douleur thoracique, <strong>cliquez ici pour appeler le 15</strong>.</div>
+        <div class="texte-battant"><span class="point-urgence" aria-hidden="true"></span><span>Urgence cardiologique : En cas de douleur thoracique, <strong>cliquez ici pour appeler le 15</strong>.</span></div>
     </a>
 
     <header>
         <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Dr. ZMOULI</a>
-        <nav>
+        <nav id="menu-principal" aria-label="Navigation principale">
             <ul>
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="profil.html">Le Médecin</a></li>
                 <li><a href="rendezvous.html">Infos & RDV</a></li>
                 <li><a href="faq.html">FAQ & Préparation</a></li>
-                <li><a href="glossaire.html" class="active">Glossaire</a></li>
+                <li><a href="glossaire.html" class="active" aria-current="page">Glossaire</a></li>
                 <li><a href="imc.html">Outil Prévention</a></li>
             </ul>
         </nav>
         <div class="header-actions">
-            <a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" class="btn-rdv">Prendre RDV</a>
-            <button id="btn-theme" class="btn-theme"><i id="icon-theme" class="fa-solid fa-moon"></i></button>
+            <a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" rel="noopener" class="btn-rdv"><i class="fa-regular fa-calendar-check"></i><span>Prendre RDV</span></a>
+            <button id="btn-theme" class="btn-theme" title="Basculer le mode sombre" aria-label="Basculer le mode sombre"><i id="icon-theme" class="fa-solid fa-moon"></i></button>
+            <button id="btn-menu" class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-principal"><i class="fa-solid fa-bars"></i></button>
         </div>
     </header>
 
     <div class="container-page">
-        <h1 class="page-titre" data-aos="fade-down">Dictionnaire de Cardiologie</h1>
+        <div class="page-entete">
+            <span class="eyebrow" data-aos="fade-down">Glossaire</span>
+            <h1 class="page-titre" data-aos="fade-down">Dictionnaire de Cardiologie</h1>
+        </div>
 
         <div class="search-box" data-aos="fade-up" data-aos-delay="100">
-            <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);color:#94a3b8;"></i>
-            <input type="text" id="search-glossaire" oninput="filtrerGlossaire()" placeholder="Rechercher (ex: AVC, Tension, Valve)…">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search-glossaire" oninput="filtrerGlossaire()" placeholder="Rechercher (ex: AVC, Tension, Valve)…" aria-label="Rechercher un terme">
         </div>
 
         <div class="alphabet-index" data-aos="fade-up" data-aos-delay="150">
-            <button class="alpha-btn" onclick="filterByLetter('A')">A</button>
-            <button class="alpha-btn" onclick="filterByLetter('B')">B</button>
-            <button class="alpha-btn" onclick="filterByLetter('C')">C</button>
-            <button class="alpha-btn" onclick="filterByLetter('D')">D</button>
-            <button class="alpha-btn" onclick="filterByLetter('E')">E</button>
-            <button class="alpha-btn" onclick="filterByLetter('F')">F</button>
-            <button class="alpha-btn" onclick="filterByLetter('H')">H</button>
-            <button class="alpha-btn" onclick="filterByLetter('I')">I</button>
-            <button class="alpha-btn" onclick="filterByLetter('P')">P</button>
-            <button class="alpha-btn" onclick="filterByLetter('S')">S</button>
-            <button class="alpha-btn" onclick="filterByLetter('T')">T</button>
-            <button class="alpha-btn" onclick="filterByLetter('V')">V</button>
-            <button class="alpha-btn" onclick="showAll()" style="background:var(--primary);color:white;border-color:var(--primary);">TOUS</button>
+            <button class="alpha-btn" onclick="filterByLetter('A', this)">A</button>
+            <button class="alpha-btn" onclick="filterByLetter('B', this)">B</button>
+            <button class="alpha-btn" onclick="filterByLetter('C', this)">C</button>
+            <button class="alpha-btn" onclick="filterByLetter('D', this)">D</button>
+            <button class="alpha-btn" onclick="filterByLetter('E', this)">E</button>
+            <button class="alpha-btn" onclick="filterByLetter('F', this)">F</button>
+            <button class="alpha-btn" onclick="filterByLetter('H', this)">H</button>
+            <button class="alpha-btn" onclick="filterByLetter('I', this)">I</button>
+            <button class="alpha-btn" onclick="filterByLetter('P', this)">P</button>
+            <button class="alpha-btn" onclick="filterByLetter('S', this)">S</button>
+            <button class="alpha-btn" onclick="filterByLetter('T', this)">T</button>
+            <button class="alpha-btn" onclick="filterByLetter('V', this)">V</button>
+            <button class="alpha-btn active" onclick="showAll(this)">TOUS</button>
         </div>
+        <p class="compteur-termes" id="compteur-termes" aria-live="polite"></p>
 
-        <p id="no-results" style="display:none;text-align:center;color:var(--text-muted);font-size:1.1em;padding:40px;">Aucun terme trouvé.</p>
+        <p id="no-results">Aucun terme trouvé.</p>
 
         <div class="grille-glossaire" id="liste-glossaire">
             <div class="carte term-card" data-aos="fade-up"><h3>AVC</h3><p>Accident Vasculaire Cérébral : arrêt brutal de l'irrigation d'une partie du cerveau.</p></div>
@@ -98,32 +101,69 @@
     </div>
 
     <footer>
-        <p><strong>Docteur Safi Med ZMOULI — Cardiologue & Maladies Vasculaires</strong></p>
-        <p>RPPS : 10100590727 | Pornic & Nantes</p>
+        <div class="footer-grille">
+            <div>
+                <a href="index.html" class="logo"><i class="fa-solid fa-heart-pulse"></i> Dr. ZMOULI</a>
+                <p><strong>Docteur Safi Med ZMOULI — Cardiologue & Maladies Vasculaires</strong></p>
+                <p>RPPS : 10100590727 | Pornic & Nantes</p>
+            </div>
+            <div>
+                <h3>Cabinets</h3>
+                <p><strong>Pornic</strong><br>23 Boulevard de Linz, 44210 Pornic</p>
+                <p><strong>Nantes</strong> (le jeudi, 14h00 – 19h00)<br>4 Rue Eric Tabarly, 44200 Nantes</p>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>Secrétariat : <a href="tel:0240822757">02 40 82 27 57</a></p>
+                <p><a href="https://www.maiia.com/cardiologue/44210-pornic/zmouli-safi-med" target="_blank" rel="noopener">Prendre RDV sur Maiia →</a></p>
+                <p><a href="rendezvous.html">Horaires & accès</a></p>
+            </div>
+            <div>
+                <h3>Urgence</h3>
+                <p>En cas de douleur thoracique :</p>
+                <p><a href="tel:15" class="footer-urgence"><i class="fa-solid fa-phone"></i> Appeler le 15</a></p>
+            </div>
+        </div>
+        <div class="footer-bas">
+            <span>Docteur Safi Med ZMOULI — Cardiologue & Maladies Vasculaires</span>
+            <span>RPPS : 10100590727 | Pornic & Nantes</span>
+        </div>
     </footer>
 
-    <!-- Bouton retour en haut (dans le body, pas le head) -->
-    <button id="btn-retour-haut" title="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
+    <button id="btn-retour-haut" title="Retour en haut" aria-label="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
 
     <script src="script.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true });
-
-        function filterByLetter(letter) {
+        // Si la librairie d'animation ne charge pas, on affiche tout le contenu directement
+        if (window.AOS) { AOS.init({ duration: 700, once: true, offset: 40 }); }
+        else { document.querySelectorAll('[data-aos]').forEach(e => e.removeAttribute('data-aos')); }
+    </script>
+    <script>
+        // Filtre par lettre (le bouton cliqué est passé en paramètre)
+        function filterByLetter(letter, bouton) {
             document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            if (bouton) bouton.classList.add('active');
+            document.getElementById('search-glossaire').value = '';
+            let nb = 0;
             document.querySelectorAll('.term-card').forEach(card => {
-                const title = card.querySelector('h3').innerText.toUpperCase();
-                card.style.display = title.startsWith(letter) ? '' : 'none';
+                const title = card.querySelector('h3').innerText.toUpperCase()
+                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const ok = title.startsWith(letter);
+                card.style.display = ok ? '' : 'none';
+                if (ok) nb++;
             });
             document.getElementById('no-results').style.display = 'none';
+            majCompteur(nb);
         }
 
-        function showAll() {
+        function showAll(bouton) {
             document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+            if (bouton) bouton.classList.add('active');
+            document.getElementById('search-glossaire').value = '';
             document.querySelectorAll('.term-card').forEach(card => card.style.display = '');
             document.getElementById('no-results').style.display = 'none';
+            majCompteur();
         }
     </script>
 </body>
